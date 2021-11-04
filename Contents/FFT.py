@@ -28,7 +28,7 @@ def IFFT(signal):
         return signal + 0j
     
     n = np.arange(N)
-    w = (1/N)*np.exp(-2j*np.pi*n/N)
+    w = np.exp(2j*np.pi*n/N)
     
     signal_even, signal_odd = signal[::2], signal[1::2]
     y_even, y_odd = FFT(signal_even), FFT(signal_odd)
@@ -40,7 +40,7 @@ def IFFT(signal):
         y[i] = y_even[i] + t
         y[i+int(N/2)] = y_even[i] - t
     
-    return y
+    return y/N
 
 def FFT2D(img):
 
